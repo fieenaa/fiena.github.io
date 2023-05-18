@@ -1,0 +1,623 @@
+<html><head>
+<link rel="icon" href="image/yanaxayap.png" type="image/gif" sizes="100x100">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">body, a, a:link{cursor:url(image/cursor1.png), default;} a:hover {cursor:url(image/cursor2.png),wait;}</style> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script><script type="text/javascript">/***********************************************
+* Scroll To Top Control script- &#169; Dynamic Drive DHTML code library(www.dynamicdrive.com)* Modified byLiyanaFauzi***********************************************/var scrolltotop={
+setting: {startline:100, scrollto: 0, scrollduration:1000, fadeduration:[500, 100]},
+controlHTML: '<img src="image/fly.png" />',
+controlattrs: {offsetx:5, offsety:5},
+anchorkeyword: '#top',
+state: {isvisible:false, shouldvisible:false},
+scrollup:function(){
+if (!this.cssfixedsupport)
+this.$control.css({opacity:0})
+var dest=isNaN(this.setting.scrollto)? this.setting.scrollto : parseInt(this.setting.scrollto)
+if (typeof dest=="string" && jQuery('#'+dest).length==1)
+dest=jQuery('#'+dest).offset().top
+else
+dest=0
+this.$body.animate({scrollTop: dest}, this.setting.scrollduration);
+},
+keepfixed:function(){
+var $window=jQuery(window)
+var controlx=$window.scrollLeft() + $window.width() - this.$control.width() - this.controlattrs.offsetx
+var controly=$window.scrollTop() + $window.height() - this.$control.height() - this.controlattrs.offsety
+this.$control.css({left:controlx+'px', top:controly+'px'})
+},
+togglecontrol:function(){
+var scrolltop=jQuery(window).scrollTop()
+if (!this.cssfixedsupport)
+this.keepfixed()
+this.state.shouldvisible=(scrolltop>=this.setting.startline)? true : false
+if (this.state.shouldvisible && !this.state.isvisible){
+this.$control.stop().animate({opacity:1}, this.setting.fadeduration[0])
+this.state.isvisible=true
+}
+else if (this.state.shouldvisible==false && this.state.isvisible){
+this.$control.stop().animate({opacity:0}, this.setting.fadeduration[1])
+this.state.isvisible=false
+}
+},
+init:function(){
+jQuery(document).ready(function($){
+var mainobj=scrolltotop
+var iebrws=document.all
+mainobj.cssfixedsupport=!iebrws || iebrws && document.compatMode=="CSS1Compat" && window.XMLHttpRequest
+mainobj.$body=(window.opera)? (document.compatMode=="CSS1Compat"? $('html') : $('body')) : $('html,body')
+mainobj.$control=$('<div id="topcontrol">'+mainobj.controlHTML+'</div>')
+.css({position:mainobj.cssfixedsupport? 'fixed' : 'absolute', bottom:mainobj.controlattrs.offsety, right:mainobj.controlattrs.offsetx, opacity:0, cursor:'pointer'})
+.attr({title:'Scroll Back to Top'})
+.click(function(){mainobj.scrollup(); return false})
+.appendTo('body')
+if (document.all && !window.XMLHttpRequest && mainobj.$control.text()!='')
+mainobj.$control.css({width:mainobj.$control.width()})
+mainobj.togglecontrol()
+$('a[href="' + mainobj.anchorkeyword +'"]').click(function(){
+mainobj.scrollup()
+return false
+})
+$(window).bind('scroll resize', function(e){
+mainobj.togglecontrol()
+})
+})
+}
+}
+scrolltotop.init()
+</script>
+
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+// <![CDATA[
+var colour="grey";
+var sparkles=100;
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+window.onload=function() { if (document.getElementById) {
+var i, rats, rlef, rdow;
+for (var i=0; i<sparkles; i++) {
+var rats=createDiv(3, 3);
+rats.style.visibility="hidden";
+document.body.appendChild(tiny[i]=rats);
+starv[i]=0;
+tinyv[i]=0;
+var rats=createDiv(5, 5);
+rats.style.backgroundColor="transparent";
+rats.style.visibility="hidden";
+var rlef=createDiv(1, 5);
+var rdow=createDiv(5, 1);
+rats.appendChild(rlef);
+rats.appendChild(rdow);
+rlef.style.top="3px";
+rlef.style.left="0px";
+rdow.style.top="0px";
+rdow.style.left="3px";
+document.body.appendChild(star[i]=rats);
+}
+set_width();
+sparkle();
+}}
+function sparkle() {
+var c;
+if (x!=ox || y!=oy) {
+ox=x;
+oy=y;
+for (c=0; c<sparkles; c++) if (!starv[c]) {
+star[c].style.left=(starx[c]=x)+"px";
+
+
+star[c].style.top=(stary[c]=y)+"px";
+star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+star[c].style.visibility="visible";
+starv[c]=50;
+break;
+}
+}
+for (c=0; c<sparkles; c++) {
+if (starv[c]) update_star(c);
+if (tinyv[c]) update_tiny(c);
+}
+setTimeout("sparkle()", 40);
+}
+function update_star(i) {
+if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+if (starv[i]) {
+stary[i]+=1+Math.random()*3;
+if (stary[i]<shigh+sdown) {
+star[i].style.top=stary[i]+"px";
+starx[i]+=(i%5-2)/5;
+star[i].style.left=starx[i]+"px";
+}
+else {
+star[i].style.visibility="hidden";
+starv[i]=0;
+return;
+}
+
+
+}
+else {
+tinyv[i]=50;
+tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+tiny[i].style.width="2px";
+tiny[i].style.height="2px";
+star[i].style.visibility="hidden";
+tiny[i].style.visibility="visible"
+}
+}
+function update_tiny(i) {
+if (--tinyv[i]==25) {
+tiny[i].style.width="1px";
+tiny[i].style.height="1px";
+}
+if (tinyv[i]) {
+tinyy[i]+=1+Math.random()*3;
+if (tinyy[i]<shigh+sdown) {
+tiny[i].style.top=tinyy[i]+"px";
+tinyx[i]+=(i%5-2)/5;
+tiny[i].style.left=tinyx[i]+"px";
+}
+else {
+
+tiny[i].style.visibility="hidden";
+tinyv[i]=0;
+return;
+}
+}
+else tiny[i].style.visibility="hidden";
+}
+document.onmousemove=mouse;
+function mouse(e) {
+set_scroll();
+y=(e)?e.pageY:event.y+sdown;
+x=(e)?e.pageX:event.x+sleft;
+}
+function set_scroll() {
+if (typeof(self.pageYOffset)=="number") {
+sdown=self.pageYOffset;
+sleft=self.pageXOffset;
+}
+else if (document.body.scrollTop || document.body.scrollLeft) {
+sdown=document.body.scrollTop;
+sleft=document.body.scrollLeft;
+}
+else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+sleft=document.documentElement.scrollLeft;
+sdown=document.documentElement.scrollTop;
+}
+else {
+sdown=0;
+sleft=0;
+}
+}
+window.onresize=set_width;
+function set_width() {
+if (typeof(self.innerWidth)=="number") {
+swide=self.innerWidth;
+shigh=self.innerHeight;
+}
+else if (document.documentElement && document.documentElement.clientWidth) {
+swide=document.documentElement.clientWidth;
+shigh=document.documentElement.clientHeight;
+}
+else if (document.body.clientWidth) {
+swide=document.body.clientWidth;
+shigh=document.body.clientHeight;
+}
+}
+function createDiv(height, width) {
+var div=document.createElement("div");
+div.style.position="absolute";
+div.style.height=height+"px";
+div.style.width=width+"px";
+div.style.overflow="hidden";
+div.style.backgroundColor=colour;
+return (div);
+}
+// ]]>
+</script>
+
+<style>
+b {
+ color; #000000;
+    text-shadow: 0px 1px 9px #626363;
+}
+
+b:hover {
+ color: #000000;
+    text-shadow: 0px 1px 9px #fff;
+font-szie: 45px;font-weight: bold;text-decoration: none;}
+}
+</style>
+<style>
+blockquote {
+background-image: url(image/bg.jpg);border:2px solid #595959;border-left:10pt double #595959;padding: 3px;border-bottom-left-radius: 10px;border-top-left-radius: 10px;}
+
+ blockquote:hover {
+background: #cfcfcf;
+-webkit-transition-duration: 2.5s;
+background-image:url(image/stolobeli.gif);
+background-position:bottom right;
+background-repeat:no-repeat;
+border:2px dashed #242424;
+border-right:10pt double #242424;
+text-shadow: -1px 0px 1px #fff;
+}
+margin: 1em 20px;
+}
+blockquote p {
+margin: .75em 0;
+}
+</style>
+<style>
+a:link {
+text-decoration:underline;
+border-bottom: #b1b4b5 2px dashed;
+color: #3d416b;
+padding: 0.1px;
+}
+a:hover {
+text-decoration: none;
+background: #c2d1d0;
+border-bottom: #737475 2px solid;
+-webkit-transition-duration: 2s;
+color: #131a2e;
+-moz-border-radius: 3px;
+filter:alpa(opacity=100);
+-moz-opacity:1.0;
+opacity:1.0;
+border-radius: 5px;
+padding-top: 1px;
+padding-bottom: 1px;
+padding-left: 2px;
+padding-right: 2px;
+}
+</style>
+<style>
+::-webkit-scrollbar {
+width: 9px;
+height: 7px;
+}
+::-webkit-scrollbar-track-piece {
+background-color: black;
+border: 4px solid #d7dbde;
+}
+::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal {
+background-color: #909696;
+border: 1px solid #c7bbbd;
+}
+</style>
+
+
+<title>EDUCATION</title>
+
+</style></head>
+
+<body style="background-image:url('images/EDUCATION BG.jpg');background-size:100%">
+
+<!-- Simulate a smartphone / tablet -->
+<div class="mobile-container">
+
+<style>
+#mySidenav a {
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 150px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+
+#home {
+  top: 80px;
+  background-color: #CD5C5C;
+}
+
+#biodata {
+  top: 140px;
+  background-color: #DA70D6;
+}
+
+#family {
+  top: 200px;
+  background-color: #4B0082;
+}
+
+#education {
+  top: 260px;
+  background-color: #558
+}
+
+#experience {
+  top: 320px;
+  background-color: #589
+}
+
+#gallery {
+  top: 380px;
+  background-color: #D2691E
+}
+
+</style>
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="index.html" id="home">Home</a>
+  <a href="biodata.html" id="biodata">Biodata</a>
+  <a href="family.html" id="family">Family</a>
+  <a href="education.html" id="education">Education</a>
+  <a href="experience.html" id="experience">Experience</a>
+  <a href="gallery.html" id="gallery">Gallery</a>
+</div>
+
+<style>
+
+<html><head>
+<title>My Home</title>
+</head>
+<body table="" background="background/white.jpg" width="50%" height="50%">
+<div class="bg"></div>
+<table width="95%" border="0" align="center">
+<tbody><tr>
+<td bgcolor="#FDEDEC">
+
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+.bg {
+background-image: url("background/flower.jpg");
+height: 40%; 
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+</style>
+
+<br>
+
+</div><h><br><font color="white" face="My Underwood" align="center" <=""><h>
+<h1><i>🏫 EDUCATION 🏫</i></h1>
+<br>
+<br>
+
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+  margin: 10px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.box {
+  background-color: lightgrey;
+  width: 950px;
+  border: 4px solid black;
+  padding: 50px;
+  margin: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="images/SEKOLAH.jpg" alt="Avatar" style="width:300px;height:300px;">
+      </div>
+      <div class="flip-card-back">
+        <img src="images/primary.jpeg" alt="Avatar" style="width:250px;height:300px;">    
+        <p> SK PEREMBA</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="images/SMK SERI AMPANG.jpg" alt="Avatar" style="width:300px;height:300px;">
+      </div>
+      <div class="flip-card-back">
+        <img src="images/secondary.jpeg" alt="Avatar" style="width:250px;height:300px;">
+        <p>SMK SERI AMPANG</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="images/UITM.jpg" alt="Avatar" style="width:300px;height:300px;">
+      </div>
+      <div class="flip-card-back">
+        <img src="images/higher.jpeg" alt="Avatar" style="width:250px;height:300px;">
+        <p>UITM MERBOK</p>
+      </div>
+    </div>
+  </div>
+</div>
+<center>
+<div class="box" style="text-align: justify;">
+  <font face="times new roman" color="black"> In a small town, a cheerful girl named Nur Sufina Binti Ayub with a nickname Fina, attended Sekolah Rendah Kebangsaan Peremba. I loved music, playing in the school garden, and participating in the annual play. With nurturing teachers and close friendships, my primary school years became a cherished chapter in my life, inspiring me love for learning. During secondary school, I joined the foot marching. I practiced diligently and, on parade day, performed flawlessly. The crowd cheered us with confidence and precision. It was a moment of pride and unity, highlighting the value of teamwork and dedication. While at university, I took an Information Management course. There are various knowledge that I got while taking this course. Even though there are subjects that are very difficult to understand, I am lucky to have lecturers and friends who help me when I'm having difficulties and confusion.
+</div>
+
+<br><br><br><br><br>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.footer {
+   position: sticky;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: brown;
+   color: white;
+   text-align: center;
+}
+</style>
+
+</font><table width="85%" border="0" align="center">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #D98880;
+}
+
+.topnav a {
+  float: left;
+  color: #641E16;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+
+
+<style>
+img {display: block; margin-left: auto; margin-right: auto;}
+</style>
+
+
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+
+<style>
+img {display: block; margin-left: auto; margin-right: auto;}
+</style>
+
+
+</table></td></tr></tbody></table></body></html>
+
+
+</body>
+</html>
